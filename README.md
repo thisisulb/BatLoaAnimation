@@ -8,9 +8,7 @@ Concept: Animation will be implemented via two animation slots, allowing to swit
 Todo:   
       Create animation sequences that are derived from other sequences. (e.g.: DE -> SL, TW)  
       Resize animation   
-      Palette fixes (?)  
-      Add sound set    
-      Add proper *.ini files  
+      Palette fixes (?)    
       Add WeiDU mod  
 
 
