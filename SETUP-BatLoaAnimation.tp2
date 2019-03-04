@@ -1,0 +1,78 @@
+BACKUP ~BatLoaAnimation/backup~
+AUTHOR ~ThisIsUlb@gmail.com~
+VERSION ~0.1~
+
+
+ALWAYS
+INCLUDE ~BatLoaAnimation/functions.tph~   // Borrowed from Argent77 for dynamic animtion slot search code
+
+BEGIN 
+~BatLoaAnimation~ 
+
+
+// Basic copy & compile
+
+//fly
+COPY ~BatLoaAnimation/BatLoaFly_FullSize~ ~override~
+COPY ~BatLoaAnimation/BatLoaFly_FullSize/UBBTFSc.bam~ ~override/UBBTFSd.bam~
+COPY ~BatLoaAnimation/BatLoaFly_FullSize/UBBTFSce.bam~ ~override/UBBTFSde.bam~
+COPY ~BatLoaAnimation/BatLoaFly_FullSize/UBBTFSc.bam~ ~override/UBBTFSp.bam~
+COPY ~BatLoaAnimation/BatLoaFly_FullSize/UBBTFSce.bam~ ~override/UBBTFSpe.bam~
+COPY ~BatLoaAnimation/BatLoaFly_FullSize/UBBTFSc.bam~ ~override/UBBTFca.bam~
+COPY ~BatLoaAnimation/BatLoaFly_FullSize/UBBTFSce.bam~ ~override/UBBTFcae.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWINV.bam~ ~override/UBBTFINV.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWSl.bam~ ~override/UBBTfSl.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWSle.bam~ ~override/UBBTfSle.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWTW.bam~ ~override/UBBTFTW.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWTWe.bam~ ~override/UBBTFTWe.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWde.bam~ ~override/UBBTFde.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWdee.bam~ ~override/UBBTFdee.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWgu.bam~ ~override/UBBTfgu.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWgue.bam~ ~override/UBBTfgue.bam~
+
+// walk
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize~ ~override~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWSc.bam~ ~override/UBBTWSd.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWSce.bam~ ~override/UBBTWSde.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWA1.bam~ ~override/UBBTWA2.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWA1.bam~ ~override/UBBTWA3.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWA1.bam~ ~override/UBBTWA4.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWA1.bam~ ~override/UBBTWASP.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWA1e.bam~ ~override/UBBTWA2e.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWA1e.bam~ ~override/UBBTWA3e.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWA1e.bam~ ~override/UBBTWA4e.bam~
+COPY ~BatLoaAnimation/BatLoaWalk_FullSize/UBBTWA1e.bam~ ~override/UBBTWASPe.bam~
+
+
+
+
+
+
+  ///////////////////////////////
+  // Install Animations        //
+  ///////////////////////////////
+ 
+  
+  // WALK
+  LAF FIND_FREE_ANIM_SLOT INT_VAR slotMin = 0xe000 slotMax = 0xefff RET slot END
+  ACTION_IF (slot <= 0) BEGIN
+    FAIL ~No free creature animation slot found.~
+  END
+  LAF TO_HEX_NUMBER INT_VAR value = slot minDigits = 4 RET hexNumber END
+  APPEND ~animate.ids~ ~0x%hexNumber% BAT_LOA_WALK~ UNLESS ~BAT_LOA_WALK~
+  CLEAR_IDS_MAP
+  COPY ~BatLoaAnimation/files/exxW.ini~ ~override/%hexNumber%.ini~
+  
+  // FLY
+  LAF FIND_FREE_ANIM_SLOT INT_VAR slotMin = 0xe000 slotMax = 0xefff RET slot END
+  ACTION_IF (slot <= 0) BEGIN
+    FAIL ~No free creature animation slot found.~
+  END
+  LAF TO_HEX_NUMBER INT_VAR value = slot minDigits = 4 RET hexNumber END
+  APPEND ~animate.ids~ ~0x%hexNumber% BAT_LOA_FLY~ UNLESS ~BAT_LOA_FLY~
+  CLEAR_IDS_MAP
+  COPY ~BatLoaAnimation/files/exxF.ini~ ~override/%hexNumber%.ini~
+
+ 
+  
+  
